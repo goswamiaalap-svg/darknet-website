@@ -36,13 +36,37 @@ export async function POST(req) {
     };
 
     try {
-      await ensureDataFile();
-      // Read existing requests
-      const raw = await readFile(DATA_FILE, 'utf-8');
-      const requests = JSON.parse(raw);
-      requests.push(newRequest);
-      // Save back
-      await writeFile(DATA_FILE, JSON.stringify(requests, null, 2));
+      const redisUrl = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
+      const redisToken = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+
+      if (redisUrl && redisToken) {
+        let requests = [];
+        try {
+          const res = await fetch(`${redisUrl}/get/darknet_joins`, {
+            headers: { Authorization: `Bearer ${redisToken}` },
+            cache: 'no-store'
+          });
+          const data = await res.json();
+          if (data && data.result) requests = JSON.parse(data.result);
+        } catch (e) { /* ignore read error */ }
+        
+        requests.push(newRequest);
+        
+        await fetch(`${redisUrl}/set/darknet_joins`, {
+          method: 'POST',
+          headers: { 
+            Authorization: `Bearer ${redisToken}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(JSON.stringify(requests))
+        });
+      } else {
+        await ensureDataFile();
+        const raw = await readFile(DATA_FILE, 'utf-8');
+        const requests = JSON.parse(raw);
+        requests.push(newRequest);
+        await writeFile(DATA_FILE, JSON.stringify(requests, null, 2));
+      }
     } catch (fileError) {
       console.warn('Filesystem read-only (Serverless). Storing join request in memory:', fileError.message);
       inMemoryRequests.push(newRequest);
