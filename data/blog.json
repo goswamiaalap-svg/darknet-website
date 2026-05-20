@@ -1,0 +1,68 @@
+[
+  {
+    "id": "blog-001",
+    "title": "Understanding the MITRE ATT&CK Framework for Offensive Security",
+    "slug": "mitre-attack-framework",
+    "excerpt": "A practical guide to using MITRE ATT&CK for red team operations, threat hunting, and building detection rules.",
+    "category": "Research",
+    "author": "Rohan Mehta",
+    "publishedAt": "2025-05-10T10:00:00Z",
+    "readTime": 8,
+    "tags": ["MITRE", "Red Team", "Threat Intelligence"]
+  },
+  {
+    "id": "blog-002",
+    "title": "How We Found a Critical SSRF in a Major SaaS Platform",
+    "slug": "ssrf-saas-platform-bugbounty",
+    "excerpt": "A walkthrough of a server-side request forgery vulnerability that led to internal AWS metadata exposure and a $5,000 bug bounty payout.",
+    "category": "Bug Bounty",
+    "author": "Arjun Nair",
+    "publishedAt": "2025-05-02T10:00:00Z",
+    "readTime": 12,
+    "tags": ["SSRF", "Bug Bounty", "AWS", "Web Security"]
+  },
+  {
+    "id": "blog-003",
+    "title": "Reverse Engineering Android Malware with Jadx and Frida",
+    "slug": "android-malware-reverse-engineering",
+    "excerpt": "Step-by-step breakdown of decompiling, analysing, and hooking a banking trojan using open-source tools.",
+    "category": "Malware Analysis",
+    "author": "Kiran Reddy",
+    "publishedAt": "2025-04-22T10:00:00Z",
+    "readTime": 15,
+    "tags": ["Android", "Malware", "Reverse Engineering", "Frida"]
+  },
+  {
+    "id": "blog-004",
+    "title": "Beginner's Guide to CTF — Where to Start in 2025",
+    "slug": "beginners-guide-ctf-2025",
+    "excerpt": "New to Capture the Flag competitions? Here's everything you need — platforms, tools, resources, and community advice.",
+    "category": "Guide",
+    "author": "Ananya Gupta",
+    "publishedAt": "2025-04-10T10:00:00Z",
+    "readTime": 6,
+    "tags": ["CTF", "Beginner", "Guide"]
+  },
+  {
+    "id": "blog-005",
+    "title": "Critical RCE in Popular Open-Source CMS — TDC Disclosure",
+    "slug": "rce-cms-tdc-disclosure",
+    "excerpt": "TheDarkNet Community responsible disclosure of a pre-auth remote code execution vulnerability in a widely used content management system.",
+    "category": "CVE Disclosure",
+    "author": "Vikram Singh",
+    "publishedAt": "2025-03-28T10:00:00Z",
+    "readTime": 10,
+    "tags": ["RCE", "CVE", "Responsible Disclosure", "CMS"]
+  },
+  {
+    "id": "blog-006",
+    "title": "Building a Home Lab for Ethical Hacking on a Budget",
+    "slug": "home-lab-ethical-hacking",
+    "excerpt": "A practical guide to setting up a virtual lab environment using VirtualBox, Kali Linux, Metasploitable, and DVWA for under ₹0.",
+    "category": "Guide",
+    "author": "Suresh Kumar",
+    "publishedAt": "2025-03-15T10:00:00Z",
+    "readTime": 9,
+    "tags": ["Lab Setup", "Kali Linux", "Beginner", "Guide"]
+  }
+]

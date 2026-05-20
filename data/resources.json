@@ -1,0 +1,90 @@
+[
+  {
+    "id": "res-001",
+    "title": "Hacker's Handbook 2025",
+    "description": "Comprehensive PDF guide covering penetration testing methodology, tools, and techniques used by professional ethical hackers.",
+    "category": "Whitepaper",
+    "type": "PDF",
+    "url": "#",
+    "tags": ["Penetration Testing", "Guide", "Methodology"],
+    "difficulty": "Intermediate",
+    "downloads": 1240
+  },
+  {
+    "id": "res-002",
+    "title": "Burp Suite Pro Cheat Sheet",
+    "description": "Quick reference for Burp Suite features, shortcuts, and extensions for web application testing.",
+    "category": "Cheatsheet",
+    "type": "PDF",
+    "url": "#",
+    "tags": ["Burp Suite", "Web Testing", "Tools"],
+    "difficulty": "Beginner",
+    "downloads": 2100
+  },
+  {
+    "id": "res-003",
+    "title": "OWASP Top 10 Explained — 2025 Edition",
+    "description": "Deep-dive into the latest OWASP Top 10 vulnerabilities with real-world examples, exploitation demos, and remediation guidance.",
+    "category": "Guide",
+    "type": "PDF",
+    "url": "#",
+    "tags": ["OWASP", "Web Security", "Guide"],
+    "difficulty": "Beginner",
+    "downloads": 3400
+  },
+  {
+    "id": "res-004",
+    "title": "CTF Toolkit — Essential Tools List",
+    "description": "Curated list of 50+ tools used by top CTF players across Web, Crypto, Forensics, Pwn, and OSINT categories.",
+    "category": "Tool",
+    "type": "Link",
+    "url": "#",
+    "tags": ["CTF", "Tools", "Reference"],
+    "difficulty": "Beginner",
+    "downloads": 1800
+  },
+  {
+    "id": "res-005",
+    "title": "Malware Analysis Lab Setup Guide",
+    "description": "Step-by-step guide to building an isolated malware analysis environment with REMnux, FlareVM, and Cuckoo Sandbox.",
+    "category": "Guide",
+    "type": "PDF",
+    "url": "#",
+    "tags": ["Malware", "Lab Setup", "Analysis"],
+    "difficulty": "Advanced",
+    "downloads": 890
+  },
+  {
+    "id": "res-006",
+    "title": "Linux Privilege Escalation Cheatsheet",
+    "description": "Comprehensive checklist for Linux privilege escalation vectors — SUID, sudo misconfigs, cron jobs, writeable paths, and more.",
+    "category": "Cheatsheet",
+    "type": "PDF",
+    "url": "#",
+    "tags": ["Linux", "Privilege Escalation", "CTF"],
+    "difficulty": "Intermediate",
+    "downloads": 2700
+  },
+  {
+    "id": "res-007",
+    "title": "Reverse Engineering with Ghidra — Video Series",
+    "description": "10-part video course on using the NSA's open-source reverse engineering tool Ghidra to analyse binaries.",
+    "category": "Course",
+    "type": "Video",
+    "url": "#",
+    "tags": ["Ghidra", "Reverse Engineering", "Binary"],
+    "difficulty": "Advanced",
+    "downloads": 1100
+  },
+  {
+    "id": "res-008",
+    "title": "Bug Bounty Recon Methodology",
+    "description": "Detailed recon methodology document used by experienced bug bounty hunters — subdomain enumeration, endpoint discovery, JS analysis.",
+    "category": "Whitepaper",
+    "type": "PDF",
+    "url": "#",
+    "tags": ["Bug Bounty", "Recon", "Methodology"],
+    "difficulty": "Intermediate",
+    "downloads": 2200
+  }
+]

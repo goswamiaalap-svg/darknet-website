@@ -1,0 +1,6 @@
+# TheDarkNet — Dependencies
+node_modules/
+.next/
+.env.local
+prisma/dev.db
+prisma/dev.db-journal

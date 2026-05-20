@@ -1,0 +1,68 @@
+[
+  {
+    "id": "ch-001",
+    "name": "Mumbai Chapter",
+    "slug": "mumbai",
+    "location": "Mumbai, Maharashtra",
+    "image": "/api/img?f=city",
+    "description": "The flagship chapter of TheDarkNet Community. Based in the financial capital of India, our Mumbai chapter runs monthly CTF nights, security auditing workshops, and hosts the annual HackByte competition.",
+    "memberCount": 120,
+    "eventCount": 8,
+    "established": "2022"
+  },
+  {
+    "id": "ch-002",
+    "name": "Bangalore Chapter",
+    "slug": "bangalore",
+    "location": "Bangalore, Karnataka",
+    "image": "/api/img?f=city",
+    "description": "India's tech capital hosts our most active chapter. The Bangalore team focuses on web application security, cloud security research, and has strong ties with the local startup ecosystem.",
+    "memberCount": 95,
+    "eventCount": 6,
+    "established": "2022"
+  },
+  {
+    "id": "ch-003",
+    "name": "Delhi Chapter",
+    "slug": "delhi",
+    "location": "New Delhi, Delhi",
+    "image": "/api/img?f=city",
+    "description": "The Delhi chapter specialises in OSINT, threat intelligence, and government/enterprise security. We host the annual OSINT Summit and collaborate with cybersecurity policy organisations.",
+    "memberCount": 80,
+    "eventCount": 5,
+    "established": "2023"
+  },
+  {
+    "id": "ch-004",
+    "name": "Hyderabad Chapter",
+    "slug": "hyderabad",
+    "location": "Hyderabad, Telangana",
+    "image": "/api/img?f=city",
+    "description": "Home to our binary exploitation and reverse engineering enthusiasts. The Hyderabad chapter runs the toughest bootcamps in the community and publishes regular research on low-level vulnerabilities.",
+    "memberCount": 65,
+    "eventCount": 4,
+    "established": "2023"
+  },
+  {
+    "id": "ch-005",
+    "name": "Chennai Chapter",
+    "slug": "chennai",
+    "location": "Chennai, Tamil Nadu",
+    "image": "/api/img?f=city",
+    "description": "The Chennai chapter focuses on network security, hardware hacking, and IoT security research. Known for the annual Network Security Hackathon and regular red team simulation exercises.",
+    "memberCount": 55,
+    "eventCount": 4,
+    "established": "2023"
+  },
+  {
+    "id": "ch-006",
+    "name": "Pune Chapter",
+    "slug": "pune",
+    "location": "Pune, Maharashtra",
+    "image": "/api/img?f=city",
+    "description": "Pune's chapter bridges the gap between academia and industry. With close ties to local engineering colleges, we run mentorship programmes, research groups, and malware analysis workshops.",
+    "memberCount": 70,
+    "eventCount": 3,
+    "established": "2024"
+  }
+]
