@@ -2,9 +2,9 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X, ChevronDown, Shield } from "lucide-react";
+import { Menu, X, ChevronDown, Shield, User } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const NAV_GROUPS = [
   { name: "Events", href: "/events" },
@@ -33,7 +33,30 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [user, setUser] = useState(null);
   const pathname = usePathname();
+  const router = useRouter();
+
+  useEffect(() => {
+    async function fetchUser() {
+      try {
+        const res = await fetch("/api/auth/me");
+        const data = await res.json();
+        if (res.ok && data.success) {
+          setUser(data.user);
+        } else {
+          setUser(null);
+        }
+      } catch {
+        setUser(null);
+      }
+    }
+    fetchUser();
+
+    // Listen for custom login/logout events
+    window.addEventListener("auth-changed", fetchUser);
+    return () => window.removeEventListener("auth-changed", fetchUser);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -126,20 +149,48 @@ export default function Navbar() {
         </nav>
 
         {/* CTA */}
-        <div className="hidden lg:flex items-center gap-3">
-          <Link
-            href="/admin"
-            className="p-2 text-tdc-silver/50 hover:text-tdc-red transition-colors"
-            title="Admin"
-          >
-            <Shield className="w-4 h-4" />
-          </Link>
-          <button
-            onClick={() => window.dispatchEvent(new CustomEvent("open-join-modal"))}
-            className="px-5 py-2 border border-tdc-red text-tdc-red font-orbitron text-xs font-bold hover:bg-tdc-red hover:text-white transition-all box-glow-red tracking-widest cursor-pointer"
-          >
-            JOIN NOW
-          </button>
+        <div className="hidden lg:flex items-center gap-4">
+          {user ? (
+            <>
+              {user.role === "ADMIN" ? (
+                <Link
+                  href="/admin"
+                  className="font-rajdhani text-sm font-bold text-tdc-red hover:text-red-400 uppercase tracking-widest flex items-center gap-1.5 transition-colors"
+                  title="Admin Dashboard"
+                >
+                  <Shield className="w-4.5 h-4.5" />
+                  ADMIN SYS
+                </Link>
+              ) : (
+                <Link
+                  href="/profile"
+                  className="font-rajdhani text-sm font-bold text-white hover:text-tdc-red uppercase tracking-widest flex items-center gap-1.5 transition-colors"
+                  title="Student Profile"
+                >
+                  <User className="w-4.5 h-4.5 text-tdc-red" />
+                  {user.name.split(" ")[0]}
+                </Link>
+              )}
+              <button
+                onClick={async () => {
+                  await fetch("/api/auth/logout", { method: "POST" });
+                  setUser(null);
+                  router.push("/login");
+                  router.refresh();
+                }}
+                className="font-rajdhani text-xs font-bold text-tdc-silver/50 hover:text-tdc-red uppercase tracking-widest transition-colors cursor-pointer"
+              >
+                LOGOUT
+              </button>
+            </>
+          ) : (
+            <Link
+              href="/login"
+              className="px-5 py-2 border border-tdc-red text-tdc-red font-orbitron text-xs font-bold hover:bg-tdc-red hover:text-white transition-all box-glow-red tracking-widest uppercase cursor-pointer"
+            >
+              SIGN IN
+            </Link>
+          )}
         </div>
 
         {/* Mobile toggle */}
@@ -190,16 +241,48 @@ export default function Navbar() {
                 </Link>
               )
             )}
-            <div className="px-8 pt-4">
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  window.dispatchEvent(new CustomEvent("open-join-modal"));
-                }}
-                className="w-full py-3 border border-tdc-red text-tdc-red font-orbitron text-lg box-glow-red cursor-pointer"
-              >
-                JOIN NOW
-              </button>
+            <div className="px-8 pt-4 space-y-3">
+              {user ? (
+                <>
+                  {user.role === "ADMIN" ? (
+                    <Link
+                      href="/admin"
+                      className="block w-full py-3 text-center border border-tdc-red text-tdc-red font-orbitron text-lg box-glow-red uppercase"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      ADMIN SYS
+                    </Link>
+                  ) : (
+                    <Link
+                      href="/profile"
+                      className="block w-full py-3 text-center border border-white/20 text-white font-orbitron text-lg uppercase"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      PROFILE
+                    </Link>
+                  )}
+                  <button
+                    onClick={async () => {
+                      setMobileMenuOpen(false);
+                      await fetch("/api/auth/logout", { method: "POST" });
+                      setUser(null);
+                      router.push("/login");
+                      router.refresh();
+                    }}
+                    className="w-full py-3 text-center text-tdc-silver/60 hover:text-tdc-red font-orbitron text-sm uppercase tracking-wider cursor-pointer block"
+                  >
+                    LOGOUT
+                  </button>
+                </>
+              ) : (
+                <Link
+                  href="/login"
+                  className="block w-full py-3 text-center border border-tdc-red text-tdc-red font-orbitron text-lg box-glow-red uppercase"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  SIGN IN
+                </Link>
+              )}
             </div>
           </motion.div>
         )}
