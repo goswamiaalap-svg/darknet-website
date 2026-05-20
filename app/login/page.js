@@ -1,10 +1,10 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Terminal, Shield, User, Lock, Loader, AlertCircle } from "lucide-react";
 
-export default function LoginPage() {
+function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState("idle"); // idle | loading | success | error
@@ -176,5 +176,17 @@ export default function LoginPage() {
         </div>
       </div>
     </main>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-cyber-black flex items-center justify-center">
+        <Loader className="w-8 h-8 text-tdc-red animate-spin" />
+      </div>
+    }>
+      <LoginForm />
+    </Suspense>
   );
 }
