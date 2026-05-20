@@ -14,6 +14,8 @@ async function ensureDataFile() {
   }
 }
 
+let inMemoryRequests = [];
+
 export async function POST(req) {
   try {
     const { name, email, message } = await req.json();
@@ -25,13 +27,6 @@ export async function POST(req) {
       });
     }
 
-    await ensureDataFile();
-
-    // Read existing requests
-    const raw = await readFile(DATA_FILE, 'utf-8');
-    const requests = JSON.parse(raw);
-
-    // Add new request
     const newRequest = {
       id: Date.now(),
       name,
@@ -39,10 +34,19 @@ export async function POST(req) {
       message,
       createdAt: new Date().toISOString(),
     };
-    requests.push(newRequest);
 
-    // Save back
-    await writeFile(DATA_FILE, JSON.stringify(requests, null, 2));
+    try {
+      await ensureDataFile();
+      // Read existing requests
+      const raw = await readFile(DATA_FILE, 'utf-8');
+      const requests = JSON.parse(raw);
+      requests.push(newRequest);
+      // Save back
+      await writeFile(DATA_FILE, JSON.stringify(requests, null, 2));
+    } catch (fileError) {
+      console.warn('Filesystem read-only (Serverless). Storing join request in memory:', fileError.message);
+      inMemoryRequests.push(newRequest);
+    }
 
     return new Response(JSON.stringify({ success: true, data: newRequest }), {
       status: 200,
