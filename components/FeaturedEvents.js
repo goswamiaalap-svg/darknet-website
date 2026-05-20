@@ -108,7 +108,7 @@ export default function FeaturedEvents({ events = [] }) {
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               className="font-rajdhani text-sm text-tdc-red tracking-[0.4em] uppercase block mb-3"
             >
-              // LATEST OPS
+              {"// LATEST OPS"}
             </motion.span>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}

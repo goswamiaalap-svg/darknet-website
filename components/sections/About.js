@@ -45,7 +45,7 @@ export default function About({ onJoin }) {
         >
           <div className="w-6 h-px bg-tdc-red" />
           <span className="font-rajdhani text-sm text-tdc-red tracking-[0.4em] uppercase">
-            // ABOUT THE DARKNET
+            {"// ABOUT THE DARKNET"}
           </span>
           <div className="w-6 h-px bg-tdc-red" />
         </motion.div>

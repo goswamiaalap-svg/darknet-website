@@ -96,11 +96,11 @@ export default function JoinModal({ isOpen, onClose }) {
                       ACCESS GRANTED
                     </h3>
                     <p className="font-rajdhani text-tdc-silver text-lg">
-                      Your request has been received. We'll contact you soon through
+                      Your request has been received. We&apos;ll contact you soon through
                       secure channels.
                     </p>
                     <div className="font-rajdhani text-xs text-tdc-silver/40 tracking-[0.3em] mt-2">
-                      // PROTOCOL COMPLETE
+                      {"// PROTOCOL COMPLETE"}
                     </div>
                     <button
                       onClick={handleClose}
@@ -119,7 +119,7 @@ export default function JoinModal({ isOpen, onClose }) {
                     <form onSubmit={handleSubmit} className="space-y-4">
                       <div>
                         <label className="font-rajdhani text-xs text-tdc-red/70 tracking-[0.3em] uppercase block mb-1.5">
-                          // IDENTITY
+                          {"// IDENTITY"}
                         </label>
                         <input
                           type="text"
@@ -134,7 +134,7 @@ export default function JoinModal({ isOpen, onClose }) {
 
                       <div>
                         <label className="font-rajdhani text-xs text-tdc-red/70 tracking-[0.3em] uppercase block mb-1.5">
-                          // SECURE CHANNEL
+                          {"// SECURE CHANNEL"}
                         </label>
                         <input
                           type="email"
@@ -149,7 +149,7 @@ export default function JoinModal({ isOpen, onClose }) {
 
                       <div>
                         <label className="font-rajdhani text-xs text-tdc-red/70 tracking-[0.3em] uppercase block mb-1.5">
-                          // TRANSMISSION
+                          {"// TRANSMISSION"}
                         </label>
                         <textarea
                           name="message"
