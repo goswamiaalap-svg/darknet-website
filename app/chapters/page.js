@@ -8,7 +8,9 @@ import { getChapters } from "@/lib/getData";
 import { urlFor } from "@/lib/sanity.client";
 
 function ChapterCard({ chapter, index }) {
-  const imageUrl = chapter.image?.asset ? urlFor(chapter.image).width(600).height(400).url() : null;
+  const imageUrl = chapter.image?.asset
+    ? urlFor(chapter.image).width(600).height(400).url()
+    : chapter.image?.url || (typeof chapter.image === "string" ? chapter.image : null);
 
   return (
     <motion.div
@@ -26,7 +28,7 @@ function ChapterCard({ chapter, index }) {
                 alt={chapter.name}
                 fill
                 unoptimized
-                className="object-cover opacity-40 group-hover:opacity-60 transition-opacity"
+                className="object-cover opacity-40 group-hover:opacity-75 transition-opacity"
               />
             ) : (
               <div className="w-full h-full flex flex-col items-center justify-center bg-matrix-dark gap-3">

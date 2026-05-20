@@ -28,7 +28,9 @@ export default async function ChapterDetailPage({ params }) {
   if (!chapter) notFound();
 
   const events = await getEventsByChapterId(chapter._id).catch(() => []);
-  const imageUrl = chapter.image?.asset ? urlFor(chapter.image).width(1200).height(600).url() : null;
+  const imageUrl = chapter.image?.asset
+    ? urlFor(chapter.image).width(1200).height(600).url()
+    : chapter.image?.url || (typeof chapter.image === "string" ? chapter.image : null);
 
   const upcoming = events.filter((e) => e.status?.toLowerCase() === "upcoming");
   const past = events.filter((e) => e.status?.toLowerCase() !== "upcoming");
@@ -38,7 +40,7 @@ export default async function ChapterDetailPage({ params }) {
       {/* Hero */}
       <div className="relative w-full h-[50vh] min-h-[360px] overflow-hidden">
         {imageUrl ? (
-          <Image src={imageUrl} alt={chapter.name} fill unoptimized className="object-cover" priority />
+          <Image src={imageUrl} alt={chapter.name} fill unoptimized className="object-cover opacity-50" priority />
         ) : (
           <div className="w-full h-full bg-matrix-dark" />
         )}

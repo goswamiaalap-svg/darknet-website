@@ -18,7 +18,9 @@ function formatDate(dateStr) {
 function EventCard({ event, index }) {
   const cardRef = useRef(null);
   const isInView = useInView(cardRef, { once: true, margin: "-60px" });
-  const imageUrl = event.heroImage?.asset ? urlFor(event.heroImage).width(600).height(340).url() : null;
+  const imageUrl = event.heroImage?.asset
+    ? urlFor(event.heroImage).width(600).height(340).url()
+    : event.heroImage?.url || (typeof event.heroImage === 'string' ? event.heroImage : null);
 
   return (
     <motion.div

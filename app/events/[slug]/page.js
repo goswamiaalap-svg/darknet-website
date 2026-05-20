@@ -51,7 +51,7 @@ export default async function EventDetailPage({ params }) {
 
   const imageUrl = event.heroImage?.asset
     ? urlFor(event.heroImage).width(1400).height(700).url()
-    : null;
+    : event.heroImage?.url || (typeof event.heroImage === 'string' ? event.heroImage : null);
 
   return (
     <main className="min-h-screen pt-20 pb-24">

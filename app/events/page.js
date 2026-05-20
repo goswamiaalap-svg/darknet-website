@@ -21,7 +21,9 @@ const CATEGORIES = ["All", "CTF", "Hackathon", "Workshop", "Seminar", "Bootcamp"
 const STATUSES = ["All", "Upcoming", "Ongoing", "Completed"];
 
 function EventCard({ event, index }) {
-  const imageUrl = event.heroImage?.asset ? urlFor(event.heroImage).width(600).height(340).url() : null;
+  const imageUrl = event.heroImage?.asset
+    ? urlFor(event.heroImage).width(600).height(340).url()
+    : event.heroImage?.url || (typeof event.heroImage === 'string' ? event.heroImage : null);
 
   return (
     <motion.div
