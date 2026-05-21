@@ -27,11 +27,11 @@ export default function About({ onJoin }) {
       ref={ref}
       className="relative min-h-screen flex flex-col items-center justify-center px-6 py-24 overflow-hidden"
     >
-      {/* Decorative red grid background */}
-      <div className="absolute inset-0 red-grid-bg opacity-40 pointer-events-none" />
+      {/* Decorative grid background */}
+      <div className="absolute inset-0 grid-bg opacity-40 pointer-events-none" />
       {/* Center radial glow */}
       <div className="absolute inset-0 bg-radial-gradient pointer-events-none"
-        style={{ background: "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(230,0,0,0.06) 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(6,182,212,0.06) 0%, transparent 70%)" }}
       />
 
       <div className="relative z-10 max-w-4xl mx-auto text-center">
@@ -43,11 +43,11 @@ export default function About({ onJoin }) {
           animate={isInView ? "visible" : "hidden"}
           className="inline-flex items-center gap-2 mb-6"
         >
-          <div className="w-6 h-px bg-tdc-red" />
-          <span className="font-rajdhani text-sm text-tdc-red tracking-[0.4em] uppercase">
+          <div className="w-6 h-px bg-cyan-glow" />
+          <span className="font-mono text-sm text-cyan-glow tracking-[0.4em] uppercase">
             {"// ABOUT THE DARKNET"}
           </span>
-          <div className="w-6 h-px bg-tdc-red" />
+          <div className="w-6 h-px bg-cyan-glow" />
         </motion.div>
 
         {/* Main heading */}
@@ -56,12 +56,12 @@ export default function About({ onJoin }) {
           variants={fadeUp}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="font-orbitron text-5xl md:text-7xl font-black leading-tight mb-6 tracking-tight"
+          className="font-space text-5xl md:text-7xl font-black leading-tight mb-6 tracking-tight"
         >
           HACK.{" "}
           <br className="hidden sm:block" />
           LEARN.{" "}
-          <span className="text-tdc-red text-glow-red">EVOLVE.</span>
+          <span className="text-cyan-glow text-glow-cyan">EVOLVE.</span>
         </motion.h1>
 
         {/* Body text */}
@@ -70,7 +70,7 @@ export default function About({ onJoin }) {
           variants={fadeUp}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="font-inter text-tdc-silver text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-12"
+          className="font-inter text-text-gray text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-12"
         >
           The Darknet Community is an ethical hacking collective dedicated to
           cybersecurity education, responsible research, and real-world skill
@@ -88,10 +88,10 @@ export default function About({ onJoin }) {
         >
           {stats.map((stat, i) => (
             <div key={i} className="text-center">
-              <div className="font-orbitron text-4xl md:text-5xl font-black text-tdc-red text-glow-red">
+              <div className="font-space text-4xl md:text-5xl font-black text-cyan-glow text-glow-cyan">
                 {stat.value}
               </div>
-              <div className="font-rajdhani text-tdc-silver text-sm tracking-[0.3em] uppercase mt-1">
+              <div className="font-inter text-text-gray text-sm tracking-[0.3em] uppercase mt-1">
                 {stat.label}
               </div>
             </div>
@@ -108,13 +108,13 @@ export default function About({ onJoin }) {
         >
           <Link
             href="/events"
-            className="px-8 py-3 border border-tdc-red text-tdc-red font-orbitron text-sm font-bold tracking-widest hover:bg-tdc-red hover:text-white transition-all duration-300 box-glow-red"
+            className="px-8 py-3 border border-cyan-glow text-cyan-glow font-space text-sm font-bold tracking-widest hover:bg-cyan-glow hover:text-primary-black transition-all duration-300 box-glow-cyan"
           >
             EXPLORE EVENTS
           </Link>
           <button
             onClick={onJoin}
-            className="px-8 py-3 bg-tdc-red text-white font-orbitron text-sm font-bold tracking-widest hover:bg-red-700 transition-all duration-300 box-glow-red cursor-pointer"
+            className="px-8 py-3 bg-cyan-glow text-primary-black font-space text-sm font-bold tracking-widest hover:bg-cyan-600 transition-all duration-300 box-glow-cyan cursor-pointer"
           >
             JOIN NOW
           </button>
@@ -122,10 +122,10 @@ export default function About({ onJoin }) {
       </div>
 
       {/* Corner decorations */}
-      <div className="absolute top-8 left-8 w-16 h-16 border-l-2 border-t-2 border-tdc-red/20 pointer-events-none" />
-      <div className="absolute top-8 right-8 w-16 h-16 border-r-2 border-t-2 border-tdc-red/20 pointer-events-none" />
-      <div className="absolute bottom-8 left-8 w-16 h-16 border-l-2 border-b-2 border-tdc-red/20 pointer-events-none" />
-      <div className="absolute bottom-8 right-8 w-16 h-16 border-r-2 border-b-2 border-tdc-red/20 pointer-events-none" />
+      <div className="absolute top-8 left-8 w-16 h-16 border-l-2 border-t-2 border-cyan-glow/20 pointer-events-none" />
+      <div className="absolute top-8 right-8 w-16 h-16 border-r-2 border-t-2 border-cyan-glow/20 pointer-events-none" />
+      <div className="absolute bottom-8 left-8 w-16 h-16 border-l-2 border-b-2 border-cyan-glow/20 pointer-events-none" />
+      <div className="absolute bottom-8 right-8 w-16 h-16 border-r-2 border-b-2 border-cyan-glow/20 pointer-events-none" />
     </section>
   );
 }

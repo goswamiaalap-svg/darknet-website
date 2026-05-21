@@ -23,7 +23,7 @@ export default function HeroReveal({ onJoin }) {
   return (
     <div ref={containerRef} className="relative h-[200vh] w-full">
       {/* About section revealed behind TV */}
-      <div className="sticky top-0 h-screen w-full flex items-center justify-center bg-cyber-black overflow-hidden">
+      <div className="sticky top-0 h-screen w-full flex items-center justify-center bg-primary-black overflow-hidden">
         <motion.div
           style={{ filter: bgBlur, opacity: bgOpacity, scale: bgScale }}
           className="w-full h-full flex flex-col justify-center"
@@ -48,11 +48,11 @@ export default function HeroReveal({ onJoin }) {
             <div className="hidden lg:flex tv-knobs pr-6">
               <div className="tv-knob w-6 h-6"></div>
               <div className="tv-knob w-6 h-6"></div>
-              <div className="w-6 h-1.5 bg-tdc-red/20 rounded-full mt-2"></div>
+              <div className="w-6 h-1.5 bg-cyan-glow/20 rounded-full mt-2"></div>
             </div>
           </div>
-          {/* Red glow halo behind TV */}
-          <div className="absolute -inset-10 bg-tdc-red/10 blur-[100px] rounded-full -z-10 animate-pulse"></div>
+          {/* Cyan glow halo behind TV */}
+          <div className="absolute -inset-10 bg-cyan-glow/10 blur-[100px] rounded-full -z-10 animate-pulse"></div>
         </motion.div>
       </div>
     </div>

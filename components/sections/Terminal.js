@@ -170,11 +170,11 @@ export default function Terminal({ isEmbedded = false, onJoin }) {
       onClick={() => inputRef.current?.focus()}
     >
       {/* Terminal header bar */}
-      <div className="flex items-center gap-2 px-4 py-2 border-b border-tdc-red/20 bg-black/50 shrink-0">
-        <div className="w-3 h-3 rounded-full bg-red-600 opacity-80"></div>
-        <div className="w-3 h-3 rounded-full bg-yellow-600 opacity-80"></div>
-        <div className="w-3 h-3 rounded-full bg-green-600 opacity-80"></div>
-        <span className="ml-2 font-orbitron text-xs text-tdc-red/60 tracking-widest">
+      <div className="flex items-center gap-2 px-4 py-2 border-b border-cyan-glow/20 bg-primary-black/50 shrink-0">
+        <div className="w-3 h-3 rounded-full bg-red-500 opacity-80"></div>
+        <div className="w-3 h-3 rounded-full bg-yellow-500 opacity-80"></div>
+        <div className="w-3 h-3 rounded-full bg-green-500 opacity-80"></div>
+        <span className="ml-2 font-mono text-xs text-cyan-glow/60 tracking-widest">
           TDC://SECURE_SHELL
         </span>
       </div>
@@ -188,18 +188,18 @@ export default function Terminal({ isEmbedded = false, onJoin }) {
         {lines.map((line, i) => (
           <div
             key={i}
-            className={`leading-relaxed whitespace-pre-wrap break-all ${
+            className={`leading-relaxed whitespace-pre-wrap break-all font-mono ${
               line.startsWith("$")
-                ? "text-white"
+                ? "text-text-white"
                 : line.startsWith("ERROR")
                 ? "text-red-400"
                 : line.startsWith("┌") ||
                   line.startsWith("│") ||
                   line.startsWith("└")
-                ? "text-tdc-red/80"
+                ? "text-cyan-glow/80"
                 : line.startsWith(">") || line.startsWith("→")
-                ? "text-tdc-red"
-                : "text-tdc-silver"
+                ? "text-cyan-glow"
+                : "text-text-gray"
             }`}
           >
             {line}
@@ -208,28 +208,28 @@ export default function Terminal({ isEmbedded = false, onJoin }) {
 
         {/* Currently typing boot line */}
         {currentTyping && (
-          <div className="text-tdc-red leading-relaxed">
+          <div className="text-cyan-glow leading-relaxed font-mono">
             {currentTyping}
-            <span className="terminal-cursor">&nbsp;</span>
+            <span className="terminal-cursor border-cyan-glow">&nbsp;</span>
           </div>
         )}
 
         {/* Interactive input line */}
         {bootDone && (
-          <div className="flex items-center gap-2 mt-2">
-            <span className="text-tdc-red shrink-0">$</span>
+          <div className="flex items-center gap-2 mt-2 font-mono">
+            <span className="text-cyan-glow shrink-0">$</span>
             <input
               ref={inputRef}
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="flex-1 bg-transparent outline-none text-white terminal-text text-xs sm:text-sm caret-tdc-red"
+              className="flex-1 bg-transparent outline-none text-text-white terminal-text text-xs sm:text-sm caret-cyan-glow"
               autoFocus={!isEmbedded}
               autoComplete="off"
               spellCheck={false}
             />
-            <span className="terminal-cursor">&nbsp;</span>
+            <span className="terminal-cursor border-cyan-glow">&nbsp;</span>
           </div>
         )}
       </div>

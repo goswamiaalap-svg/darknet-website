@@ -19,12 +19,12 @@ export default function Home() {
   return (
     <main className="flex flex-col w-full min-h-screen">
       <HeroReveal onJoin={() => setIsJoinOpen(true)} />
-      <div className="relative z-10 bg-cyber-black/40 backdrop-blur-sm border-y border-tdc-red/10">
+      <div className="relative z-10 bg-primary-black/40 backdrop-blur-sm border-y border-cyan-glow/10">
         <FeaturedEvents events={events} />
       </div>
       <JoinModal isOpen={isJoinOpen} onClose={() => setIsJoinOpen(false)} />
-      <footer className="py-12 bg-cyber-black text-center border-t border-gray-900 relative z-10">
-        <p className="font-orbitron text-xs text-gray-600 tracking-[0.5em] uppercase">
+      <footer className="py-12 bg-primary-black text-center border-t border-gray-900 relative z-10">
+        <p className="font-space text-xs text-text-gray tracking-[0.5em] uppercase">
           &copy; {new Date().getFullYear()} THE DARKNET COMMUNITY // SECURE PROTOCOL ACTIVE
         </p>
       </footer>

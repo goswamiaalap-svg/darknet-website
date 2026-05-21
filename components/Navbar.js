@@ -88,7 +88,7 @@ export default function Navbar() {
               className="object-contain"
               priority
             />
-            <div className="absolute inset-0 bg-tdc-red blur-2xl opacity-10 group-hover:opacity-20 transition-opacity" />
+            <div className="absolute inset-0 bg-cyan-glow blur-2xl opacity-10 group-hover:opacity-20 transition-opacity" />
           </div>
         </Link>
 
@@ -102,7 +102,7 @@ export default function Navbar() {
                 onMouseEnter={() => setOpenDropdown(item.name)}
                 onMouseLeave={() => setOpenDropdown(null)}
               >
-                <button className="flex items-center gap-1 px-3 py-2 font-rajdhani text-sm font-medium tracking-wider text-tdc-silver hover:text-white transition-colors cursor-pointer">
+                <button className="flex items-center gap-1 px-3 py-2 font-inter text-sm font-medium tracking-wider text-text-gray hover:text-text-white transition-colors cursor-pointer">
                   {item.name.toUpperCase()}
                   <ChevronDown className="w-3 h-3" />
                 </button>
@@ -113,16 +113,16 @@ export default function Navbar() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 8 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute top-full left-0 mt-1 w-44 glass-panel border border-tdc-red/10 py-2"
+                      className="absolute top-full left-0 mt-1 w-44 glass-panel border border-cyan-glow/10 py-2"
                     >
                       {item.children.map((child) => (
                         <Link
                           key={child.name}
                           href={child.href}
-                          className={`block px-4 py-2 font-rajdhani text-sm tracking-wide transition-colors ${
+                          className={`block px-4 py-2 font-inter text-sm tracking-wide transition-colors ${
                             isActive(child.href)
-                              ? "text-tdc-red"
-                              : "text-tdc-silver hover:text-white hover:bg-tdc-red/5"
+                              ? "text-cyan-glow"
+                              : "text-text-gray hover:text-text-white hover:bg-cyan-glow/5"
                           }`}
                         >
                           {child.name.toUpperCase()}
@@ -136,10 +136,10 @@ export default function Navbar() {
               <Link
                 key={item.name}
                 href={item.href}
-                className={`px-3 py-2 font-rajdhani text-sm font-medium tracking-wider transition-all ${
+                className={`px-3 py-2 font-inter text-sm font-medium tracking-wider transition-all ${
                   isActive(item.href)
-                    ? "text-white text-glow-red"
-                    : "text-tdc-silver hover:text-white"
+                    ? "text-text-white text-glow-cyan"
+                    : "text-text-gray hover:text-text-white"
                 }`}
               >
                 {item.name.toUpperCase()}
@@ -155,7 +155,7 @@ export default function Navbar() {
               {user.role === "ADMIN" ? (
                 <Link
                   href="/admin"
-                  className="font-rajdhani text-sm font-bold text-tdc-red hover:text-red-400 uppercase tracking-widest flex items-center gap-1.5 transition-colors"
+                  className="font-inter text-sm font-bold text-cyan-glow hover:text-cyan-400 uppercase tracking-widest flex items-center gap-1.5 transition-colors"
                   title="Admin Dashboard"
                 >
                   <Shield className="w-4.5 h-4.5" />
@@ -164,10 +164,10 @@ export default function Navbar() {
               ) : (
                 <Link
                   href="/profile"
-                  className="font-rajdhani text-sm font-bold text-white hover:text-tdc-red uppercase tracking-widest flex items-center gap-1.5 transition-colors"
+                  className="font-inter text-sm font-bold text-text-white hover:text-cyan-glow uppercase tracking-widest flex items-center gap-1.5 transition-colors"
                   title="Student Profile"
                 >
-                  <User className="w-4.5 h-4.5 text-tdc-red" />
+                  <User className="w-4.5 h-4.5 text-cyan-glow" />
                   {user.name.split(" ")[0]}
                 </Link>
               )}
@@ -178,7 +178,7 @@ export default function Navbar() {
                   router.push("/login");
                   router.refresh();
                 }}
-                className="font-rajdhani text-xs font-bold text-tdc-silver/50 hover:text-tdc-red uppercase tracking-widest transition-colors cursor-pointer"
+                className="font-inter text-xs font-bold text-text-gray/50 hover:text-cyan-glow uppercase tracking-widest transition-colors cursor-pointer"
               >
                 LOGOUT
               </button>
@@ -186,7 +186,7 @@ export default function Navbar() {
           ) : (
             <Link
               href="/login"
-              className="px-5 py-2 border border-tdc-red text-tdc-red font-orbitron text-xs font-bold hover:bg-tdc-red hover:text-white transition-all box-glow-red tracking-widest uppercase cursor-pointer"
+              className="px-5 py-2 border border-cyan-glow text-cyan-glow font-space text-xs font-bold hover:bg-cyan-glow hover:text-primary-black transition-all box-glow-cyan tracking-widest uppercase cursor-pointer"
             >
               SIGN IN
             </Link>
@@ -195,7 +195,7 @@ export default function Navbar() {
 
         {/* Mobile toggle */}
         <button
-          className="lg:hidden text-tdc-red relative z-[110]"
+          className="lg:hidden text-cyan-glow relative z-[110]"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
@@ -209,19 +209,19 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden absolute top-0 left-0 w-full bg-cyber-black/98 backdrop-blur-xl border-b border-tdc-red/20 pt-20 pb-8 flex flex-col z-[105] overflow-y-auto max-h-screen"
+            className="lg:hidden absolute top-0 left-0 w-full bg-primary-black/98 backdrop-blur-xl border-b border-cyan-glow/20 pt-20 pb-8 flex flex-col z-[105] overflow-y-auto max-h-screen"
           >
             {NAV_GROUPS.map((item) =>
               item.children ? (
                 <div key={item.name}>
-                  <div className="px-8 py-2 font-rajdhani text-xs text-tdc-red/50 tracking-[0.4em] uppercase">
+                  <div className="px-8 py-2 font-inter text-xs text-cyan-glow/50 tracking-[0.4em] uppercase">
                     {item.name}
                   </div>
                   {item.children.map((child) => (
                     <Link
                       key={child.name}
                       href={child.href}
-                      className="block px-10 py-2.5 font-rajdhani text-lg text-tdc-silver hover:text-white"
+                      className="block px-10 py-2.5 font-inter text-lg text-text-gray hover:text-text-white"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {child.name.toUpperCase()}
@@ -232,8 +232,8 @@ export default function Navbar() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`block px-8 py-3 font-rajdhani text-xl ${
-                    isActive(item.href) ? "text-tdc-red" : "text-tdc-silver"
+                  className={`block px-8 py-3 font-inter text-xl ${
+                    isActive(item.href) ? "text-cyan-glow" : "text-text-gray"
                   }`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -247,7 +247,7 @@ export default function Navbar() {
                   {user.role === "ADMIN" ? (
                     <Link
                       href="/admin"
-                      className="block w-full py-3 text-center border border-tdc-red text-tdc-red font-orbitron text-lg box-glow-red uppercase"
+                      className="block w-full py-3 text-center border border-cyan-glow text-cyan-glow font-space text-lg box-glow-cyan uppercase"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       ADMIN SYS
@@ -255,7 +255,7 @@ export default function Navbar() {
                   ) : (
                     <Link
                       href="/profile"
-                      className="block w-full py-3 text-center border border-white/20 text-white font-orbitron text-lg uppercase"
+                      className="block w-full py-3 text-center border border-text-white/20 text-text-white font-space text-lg uppercase"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       PROFILE
@@ -269,7 +269,7 @@ export default function Navbar() {
                       router.push("/login");
                       router.refresh();
                     }}
-                    className="w-full py-3 text-center text-tdc-silver/60 hover:text-tdc-red font-orbitron text-sm uppercase tracking-wider cursor-pointer block"
+                    className="w-full py-3 text-center text-text-gray/60 hover:text-cyan-glow font-space text-sm uppercase tracking-wider cursor-pointer block"
                   >
                     LOGOUT
                   </button>
@@ -277,7 +277,7 @@ export default function Navbar() {
               ) : (
                 <Link
                   href="/login"
-                  className="block w-full py-3 text-center border border-tdc-red text-tdc-red font-orbitron text-lg box-glow-red uppercase"
+                  className="block w-full py-3 text-center border border-cyan-glow text-cyan-glow font-space text-lg box-glow-cyan uppercase"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   SIGN IN

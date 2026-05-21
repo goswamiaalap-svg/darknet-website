@@ -15,8 +15,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="antialiased bg-cyber-black text-white selection:bg-tdc-red selection:text-white">
+      <body className="antialiased bg-primary-black text-text-white selection:bg-cyan-glow selection:text-primary-black font-inter">
         <div className="noise-overlay"></div>
+        <div className="grid-bg fixed inset-0 pointer-events-none opacity-50 z-0"></div>
         <div className="scanline"></div>
         <Navbar />
         <div className="relative z-10">{children}</div>
