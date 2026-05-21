@@ -24,21 +24,21 @@ export default function Home() {
 
   return (
     <main className="flex flex-col w-full min-h-screen">
-      <HeroReveal onJoin={() => setIsJoinOpen(true)} />
+      <div id="home"><HeroReveal onJoin={() => setIsJoinOpen(true)} /></div>
       
       <CommunityStats />
       
-      <About onJoin={() => setIsJoinOpen(true)} />
+      <div id="about"><About onJoin={() => setIsJoinOpen(true)} /></div>
       
-      <TeamSection />
+      <div id="team"><TeamSection /></div>
 
       <div className="relative z-10 bg-primary-black/40 backdrop-blur-sm border-y border-cyan-glow/10">
         <FeaturedEvents events={events} />
       </div>
 
-      <BlogResearchPreview />
+      <div id="research"><BlogResearchPreview /></div>
       
-      <Sponsorship />
+      <div id="sponsors"><Sponsorship /></div>
       
       <JoinModal isOpen={isJoinOpen} onClose={() => setIsJoinOpen(false)} />
       

@@ -8,11 +8,11 @@ import { usePathname, useRouter } from "next/navigation";
 
 const NAV_LINKS = [
   { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
+  { name: "About", href: "/#about" },
   { name: "Events", href: "/events" },
-  { name: "Research", href: "/research" },
-  { name: "Team", href: "/team" },
-  { name: "Sponsors", href: "/sponsors" },
+  { name: "Research", href: "/#research" },
+  { name: "Team", href: "/#team" },
+  { name: "Sponsors", href: "/#sponsors" },
   { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
 ];
@@ -55,6 +55,7 @@ export default function Navbar() {
 
   const isActive = (href) => {
     if (href === "/") return pathname === "/";
+    if (href.startsWith("/#")) return false; // Prevent anchor links from staying universally active
     return pathname === href || pathname?.startsWith(href + "/");
   };
 
