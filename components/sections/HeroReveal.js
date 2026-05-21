@@ -1,59 +1,67 @@
 "use client";
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import Terminal from "./Terminal";
-import About from "./About";
+import { motion } from "framer-motion";
 
 export default function HeroReveal({ onJoin }) {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
-  const tvY = useTransform(scrollYProgress, [0, 0.5], ["0%", "-150%"]);
-  const tvRotate = useTransform(scrollYProgress, [0, 0.5], [0, -20]);
-  const tvScale = useTransform(scrollYProgress, [0, 0.4], [1, 0.7]);
-  const tvOpacity = useTransform(scrollYProgress, [0, 0.45], [1, 0]);
-
-  const bgBlur = useTransform(scrollYProgress, [0, 0.5], ["blur(15px)", "blur(0px)"]);
-  const bgScale = useTransform(scrollYProgress, [0, 0.5], [0.95, 1]);
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.4], [0.4, 1]);
-
   return (
-    <div ref={containerRef} className="relative h-[200vh] w-full">
-      {/* About section revealed behind TV */}
-      <div className="sticky top-0 h-screen w-full flex items-center justify-center bg-primary-black overflow-hidden">
+    <div className="relative min-h-screen w-full flex items-center pt-20 overflow-hidden">
+      <div className="container mx-auto px-6 md:px-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-20">
+        
+        {/* Left Side: Text and CTA */}
         <motion.div
-          style={{ filter: bgBlur, opacity: bgOpacity, scale: bgScale }}
-          className="w-full h-full flex flex-col justify-center"
+          initial={{ opacity: 0, x: -40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="flex flex-col gap-6"
         >
-          <About onJoin={onJoin} />
-        </motion.div>
-      </div>
+          <h1 className="font-space text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-text-white tracking-tight">
+            Building India&apos;s Elite <br />
+            <span className="text-gradient">Cybersecurity Network</span>
+          </h1>
+          
+          <p className="font-inter text-text-gray text-lg md:text-xl max-w-lg leading-relaxed">
+            Research, Webinars, Innovation & Cybersecurity Excellence. Join the premier platform for technical professionals.
+          </p>
+          
+          <div className="flex flex-wrap items-center gap-4 mt-4">
+            <button
+              onClick={onJoin}
+              className="btn-primary px-8 py-3 font-space font-semibold tracking-wide text-sm"
+            >
+              Join Community
+            </button>
+            <a
+              href="/events"
+              className="btn-secondary px-8 py-3 font-space font-semibold tracking-wide text-sm flex items-center justify-center"
+            >
+              Explore Events
+            </a>
+          </div>
 
-      {/* TV Frame with Terminal overlaid */}
-      <div className="absolute top-0 left-0 w-full h-screen pointer-events-none z-20 flex items-center justify-center md:justify-start md:pl-[15%] lg:pl-[20%] p-4">
-        <motion.div
-          style={{ y: tvY, rotate: tvRotate, scale: tvScale, opacity: tvOpacity }}
-          className="w-full max-w-2xl pointer-events-auto"
-        >
-          <div className="tv-frame">
-            <div className="tv-screen-inner">
-              <div className="tv-reflection"></div>
-              <div className="h-[50vh] md:h-[55vh]">
-                <Terminal isEmbedded={true} onJoin={onJoin} />
-              </div>
+          <div className="flex items-center gap-8 mt-8 border-t border-text-gray/10 pt-8">
+            <div>
+              <div className="font-space text-2xl font-bold text-text-white">6K+</div>
+              <div className="font-inter text-xs text-text-gray tracking-wider uppercase mt-1">Active Members</div>
             </div>
-            <div className="hidden lg:flex tv-knobs pr-6">
-              <div className="tv-knob w-6 h-6"></div>
-              <div className="tv-knob w-6 h-6"></div>
-              <div className="w-6 h-1.5 bg-cyan-glow/20 rounded-full mt-2"></div>
+            <div>
+              <div className="font-space text-2xl font-bold text-text-white">50+</div>
+              <div className="font-inter text-xs text-text-gray tracking-wider uppercase mt-1">Events Hosted</div>
+            </div>
+            <div>
+              <div className="font-space text-2xl font-bold text-text-white">100+</div>
+              <div className="font-inter text-xs text-text-gray tracking-wider uppercase mt-1">Webinar Hours</div>
             </div>
           </div>
-          {/* Cyan glow halo behind TV */}
-          <div className="absolute -inset-10 bg-cyan-glow/10 blur-[100px] rounded-full -z-10 animate-pulse"></div>
         </motion.div>
+
+        {/* Right Side: 3D Globe placeholder / structural element if needed. Note: The actual 3D Scene is rendered globally via SceneWrapper in layout.js, so we just provide empty space here for it to shine through. */}
+        <div className="hidden lg:flex items-center justify-center h-[500px]">
+          {/* The global 3D scene will be visible here. We can add a glowing orb to enhance it. */}
+          <div className="relative w-full h-full flex items-center justify-center">
+             <div className="absolute w-[400px] h-[400px] bg-premium-blue/10 rounded-full blur-[100px] animate-pulse"></div>
+             <div className="absolute w-[300px] h-[300px] bg-cyan-glow/10 rounded-full blur-[80px] animate-glow"></div>
+          </div>
+        </div>
+
       </div>
     </div>
   );

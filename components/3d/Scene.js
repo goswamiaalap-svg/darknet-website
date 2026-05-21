@@ -34,7 +34,7 @@ function ParticleField() {
     <Points ref={ref} positions={positions} stride={3} frustumCulled={false}>
       <PointMaterial
         transparent
-        color="#e60000"
+        color="#06B6D4"
         size={0.022}
         sizeAttenuation
         depthWrite={false}
@@ -84,7 +84,7 @@ function NetworkLines() {
 
   return (
     <lineSegments ref={ref} geometry={geometry}>
-      <lineBasicMaterial color="#e60000" transparent opacity={0.08} />
+      <lineBasicMaterial color="#3B82F6" transparent opacity={0.15} />
     </lineSegments>
   );
 }
