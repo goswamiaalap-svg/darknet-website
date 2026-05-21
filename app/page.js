@@ -3,6 +3,11 @@ import { useState, useEffect } from "react";
 import FeaturedEvents from "@/components/FeaturedEvents";
 import HeroReveal from "@/components/sections/HeroReveal";
 import About from "@/components/sections/About";
+import CommunityStats from "@/components/sections/CommunityStats";
+import TeamSection from "@/components/sections/TeamSection";
+import BlogResearchPreview from "@/components/sections/BlogResearchPreview";
+import Sponsorship from "@/components/sections/Sponsorship";
+import Footer from "@/components/Footer";
 import { getFeaturedEvents } from "@/lib/getData";
 import JoinModal from "@/components/ui/JoinModal";
 
@@ -21,20 +26,23 @@ export default function Home() {
     <main className="flex flex-col w-full min-h-screen">
       <HeroReveal onJoin={() => setIsJoinOpen(true)} />
       
-      {/* Rest of the page flows naturally */}
+      <CommunityStats />
+      
       <About onJoin={() => setIsJoinOpen(true)} />
+      
+      <TeamSection />
 
       <div className="relative z-10 bg-primary-black/40 backdrop-blur-sm border-y border-cyan-glow/10">
         <FeaturedEvents events={events} />
       </div>
+
+      <BlogResearchPreview />
+      
+      <Sponsorship />
       
       <JoinModal isOpen={isJoinOpen} onClose={() => setIsJoinOpen(false)} />
       
-      <footer className="py-12 bg-primary-black text-center border-t border-gray-900 relative z-10">
-        <p className="font-space text-xs text-text-gray tracking-[0.5em] uppercase">
-          &copy; {new Date().getFullYear()} THE DARKNET COMMUNITY // SECURE PROTOCOL ACTIVE
-        </p>
-      </footer>
+      <Footer />
     </main>
   );
 }

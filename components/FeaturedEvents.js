@@ -29,10 +29,11 @@ function EventCard({ event, index }) {
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ delay: index * 0.1, duration: 0.55, ease: "easeOut" }}
     >
-      <Link href={`/events/${event.slug}`} className="block group">
-        <article className="glass-panel card-hover border border-tdc-red/10 overflow-hidden h-full flex flex-col">
+      <Link href={`/events/${event.slug}`} className="block group h-full">
+        <article className="glass-panel card-hover overflow-hidden h-full flex flex-col relative rounded-2xl">
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-glow/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10"></div>
           {/* Hero image */}
-          <div className="relative w-full aspect-video overflow-hidden bg-cyber-dark">
+          <div className="relative w-full aspect-video overflow-hidden bg-primary-black">
             {imageUrl ? (
               <Image
                 src={imageUrl}
@@ -42,16 +43,16 @@ function EventCard({ event, index }) {
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center bg-matrix-dark">
-                <Zap className="w-12 h-12 text-tdc-red/30" />
+              <div className="w-full h-full flex items-center justify-center bg-secondary-dark">
+                <Zap className="w-12 h-12 text-cyan-glow/30" />
               </div>
             )}
             {/* Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-cyber-black/80 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary-black via-transparent to-transparent" />
             {/* Type badge */}
             {event.eventType && (
-              <div className="absolute top-3 left-3">
-                <span className="font-orbitron text-xs bg-tdc-red text-white px-3 py-1 tracking-widest uppercase">
+              <div className="absolute top-4 left-4 z-10">
+                <span className="font-space font-bold text-xs bg-premium-blue text-white px-3 py-1 uppercase tracking-wider rounded-full shadow-lg border border-premium-blue/50">
                   {event.eventType}
                 </span>
               </div>
@@ -59,33 +60,33 @@ function EventCard({ event, index }) {
           </div>
 
           {/* Card body */}
-          <div className="flex flex-col flex-1 p-5">
-            <div className="flex items-center gap-3 mb-3 text-tdc-silver/70">
-              <Calendar className="w-3.5 h-3.5 text-tdc-red/60 shrink-0" />
-              <span className="font-rajdhani text-sm tracking-wide">
+          <div className="flex flex-col flex-1 p-6 relative z-10">
+            <div className="flex items-center gap-3 mb-4 text-text-gray">
+              <Calendar className="w-4 h-4 text-cyan-glow shrink-0" />
+              <span className="font-mono text-xs tracking-wide uppercase">
                 {formatDate(event.startDate)}
               </span>
             </div>
 
-            <h3 className="font-orbitron text-base font-bold text-white group-hover:text-tdc-red transition-colors mb-2 leading-snug">
+            <h3 className="font-space text-xl font-bold text-text-white group-hover:text-cyan-glow transition-colors mb-3 leading-snug">
               {event.name}
             </h3>
 
             {event.tagline && (
-              <p className="font-inter text-sm text-tdc-silver/80 line-clamp-2 flex-1 mb-4">
+              <p className="font-inter text-sm text-text-gray/80 line-clamp-2 flex-1 mb-6">
                 {event.tagline}
               </p>
             )}
 
-            <div className="mt-auto flex items-center justify-between">
-              <div className="flex items-center gap-1.5 text-tdc-silver/60">
-                <MapPin className="w-3.5 h-3.5 text-tdc-red/60" />
-                <span className="font-rajdhani text-xs tracking-wide">
+            <div className="mt-auto flex items-center justify-between pt-4 border-t border-text-gray/10">
+              <div className="flex items-center gap-1.5 text-text-gray">
+                <MapPin className="w-3.5 h-3.5 text-cyan-glow" />
+                <span className="font-mono text-xs tracking-wide uppercase">
                   {event.chapter?.name || event.location?.name || "Online"}
                 </span>
               </div>
-              <span className="font-orbitron text-xs text-tdc-red group-hover:gap-2 flex items-center gap-1 transition-all">
-                VIEW <ArrowRight className="w-3 h-3" />
+              <span className="font-space text-xs font-bold text-premium-blue uppercase flex items-center gap-1 group-hover:gap-2 transition-all">
+                Register <ArrowRight className="w-3 h-3" />
               </span>
             </div>
           </div>
@@ -100,26 +101,25 @@ export default function FeaturedEvents({ events = [] }) {
   const isInView = useInView(headingRef, { once: true });
 
   return (
-    <section className="relative py-24 px-6">
+    <section className="relative py-32 px-6 bg-primary-black">
       <div className="max-w-7xl mx-auto">
         {/* Section heading */}
-        <div ref={headingRef} className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
+        <div ref={headingRef} className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
             <motion.span
               initial={{ opacity: 0, x: -20 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
-              className="font-rajdhani text-sm text-tdc-red tracking-[0.4em] uppercase block mb-3"
+              className="font-mono text-sm text-cyan-glow tracking-[0.4em] uppercase block mb-4"
             >
-              {"// LATEST OPS"}
+              // ACTIVE DEPLOYMENTS
             </motion.span>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.1 }}
-              className="font-orbitron text-4xl md:text-5xl font-black text-white"
+              className="font-space text-4xl md:text-5xl font-black text-text-white"
             >
-              FEATURED{" "}
-              <span className="text-tdc-red text-glow-red">OPERATIONS</span>
+              UPCOMING <span className="text-cyan-glow">EVENTS</span>
             </motion.h2>
           </div>
           <motion.div
@@ -129,31 +129,30 @@ export default function FeaturedEvents({ events = [] }) {
           >
             <Link
               href="/events"
-              className="font-rajdhani text-tdc-silver hover:text-white flex items-center gap-2 text-lg tracking-wide transition-colors group"
+              className="btn-secondary px-6 py-2 font-space text-sm font-bold tracking-widest uppercase flex items-center gap-2 group"
             >
-              VIEW ALL OPERATIONS{" "}
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              View Past Events <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
         </div>
 
         {/* Events grid */}
         {events.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {events.map((event, i) => (
               <EventCard key={event._id} event={event} index={i} />
             ))}
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center py-24 text-center">
-            <div className="w-16 h-16 border border-tdc-red/20 flex items-center justify-center mb-6">
-              <Zap className="w-6 h-6 text-tdc-red/40" />
+          <div className="glass-panel p-16 flex flex-col items-center justify-center text-center">
+            <div className="w-16 h-16 rounded-full bg-cyan-glow/10 flex items-center justify-center mb-6">
+              <Zap className="w-6 h-6 text-cyan-glow" />
             </div>
-            <p className="font-orbitron text-lg text-tdc-silver/50 tracking-widest">
-              NO ACTIVE OPERATIONS
+            <p className="font-space font-bold text-xl text-text-white mb-2">
+              NO ACTIVE DEPLOYMENTS
             </p>
-            <p className="font-rajdhani text-sm text-tdc-silver/30 mt-2">
-              Check back soon for upcoming events.
+            <p className="font-inter text-sm text-text-gray">
+              Check back soon for upcoming events, webinars, and hackathons.
             </p>
           </div>
         )}

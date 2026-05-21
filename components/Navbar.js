@@ -2,37 +2,24 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X, ChevronDown, Shield, User } from "lucide-react";
+import { Menu, X, Shield, User } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname, useRouter } from "next/navigation";
 
-const NAV_GROUPS = [
+const NAV_LINKS = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
   { name: "Events", href: "/events" },
-  { name: "Chapters", href: "/chapters" },
-  {
-    name: "Learn",
-    children: [
-      { name: "Resources", href: "/resources" },
-      { name: "Blog", href: "/blog" },
-      { name: "Education", href: "/learn" },
-    ],
-  },
-  {
-    name: "Community",
-    children: [
-      { name: "Forum", href: "/forum" },
-      { name: "Announcements", href: "/announcements" },
-      { name: "Support", href: "/support" },
-    ],
-  },
-  { name: "FAQ", href: "/faq" },
+  { name: "Research", href: "/research" },
+  { name: "Team", href: "/team" },
+  { name: "Sponsors", href: "/sponsors" },
+  { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState(null);
   const [user, setUser] = useState(null);
   const pathname = usePathname();
   const router = useRouter();
@@ -52,8 +39,6 @@ export default function Navbar() {
       }
     }
     fetchUser();
-
-    // Listen for custom login/logout events
     window.addEventListener("auth-changed", fetchUser);
     return () => window.removeEventListener("auth-changed", fetchUser);
   }, []);
@@ -66,10 +51,12 @@ export default function Navbar() {
 
   useEffect(() => {
     setMobileMenuOpen(false);
-    setOpenDropdown(null);
   }, [pathname]);
 
-  const isActive = (href) => pathname === href || pathname?.startsWith(href + "/");
+  const isActive = (href) => {
+    if (href === "/") return pathname === "/";
+    return pathname === href || pathname?.startsWith(href + "/");
+  };
 
   return (
     <header
@@ -93,59 +80,22 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-1">
-          {NAV_GROUPS.map((item) =>
-            item.children ? (
-              <div
-                key={item.name}
-                className="relative"
-                onMouseEnter={() => setOpenDropdown(item.name)}
-                onMouseLeave={() => setOpenDropdown(null)}
-              >
-                <button className="flex items-center gap-1 px-3 py-2 font-inter text-sm font-medium tracking-wider text-text-gray hover:text-text-white transition-colors cursor-pointer">
-                  {item.name.toUpperCase()}
-                  <ChevronDown className="w-3 h-3" />
-                </button>
-                <AnimatePresence>
-                  {openDropdown === item.name && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 8 }}
-                      transition={{ duration: 0.15 }}
-                      className="absolute top-full left-0 mt-1 w-44 glass-panel border border-cyan-glow/10 py-2"
-                    >
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.name}
-                          href={child.href}
-                          className={`block px-4 py-2 font-inter text-sm tracking-wide transition-colors ${
-                            isActive(child.href)
-                              ? "text-cyan-glow"
-                              : "text-text-gray hover:text-text-white hover:bg-cyan-glow/5"
-                          }`}
-                        >
-                          {child.name.toUpperCase()}
-                        </Link>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ) : (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`px-3 py-2 font-inter text-sm font-medium tracking-wider transition-all ${
-                  isActive(item.href)
-                    ? "text-text-white text-glow-cyan"
-                    : "text-text-gray hover:text-text-white"
-                }`}
-              >
-                {item.name.toUpperCase()}
-              </Link>
-            )
-          )}
+        <nav className="hidden xl:flex items-center gap-2">
+          {NAV_LINKS.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className={`px-3 py-2 font-inter text-sm font-medium tracking-wider transition-all relative group ${
+                isActive(item.href)
+                  ? "text-text-white text-glow-cyan"
+                  : "text-text-gray hover:text-text-white"
+              }`}
+            >
+              {item.name}
+              {/* Smooth Hover Underline */}
+              <span className={`absolute bottom-0 left-0 w-full h-[2px] bg-cyan-glow transition-transform origin-left duration-300 ${isActive(item.href) ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}></span>
+            </Link>
+          ))}
         </nav>
 
         {/* CTA */}
@@ -156,7 +106,6 @@ export default function Navbar() {
                 <Link
                   href="/admin"
                   className="font-inter text-sm font-bold text-cyan-glow hover:text-cyan-400 uppercase tracking-widest flex items-center gap-1.5 transition-colors"
-                  title="Admin Dashboard"
                 >
                   <Shield className="w-4.5 h-4.5" />
                   ADMIN SYS
@@ -165,7 +114,6 @@ export default function Navbar() {
                 <Link
                   href="/profile"
                   className="font-inter text-sm font-bold text-text-white hover:text-cyan-glow uppercase tracking-widest flex items-center gap-1.5 transition-colors"
-                  title="Student Profile"
                 >
                   <User className="w-4.5 h-4.5 text-cyan-glow" />
                   {user.name.split(" ")[0]}
@@ -186,7 +134,7 @@ export default function Navbar() {
           ) : (
             <Link
               href="/login"
-              className="px-5 py-2 border border-cyan-glow text-cyan-glow font-space text-xs font-bold hover:bg-cyan-glow hover:text-primary-black transition-all box-glow-cyan tracking-widest uppercase cursor-pointer"
+              className="btn-primary px-5 py-2 font-space text-xs font-bold tracking-widest uppercase cursor-pointer"
             >
               SIGN IN
             </Link>
@@ -195,7 +143,7 @@ export default function Navbar() {
 
         {/* Mobile toggle */}
         <button
-          className="lg:hidden text-cyan-glow relative z-[110]"
+          className="xl:hidden text-cyan-glow relative z-[110]"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
@@ -209,77 +157,32 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden absolute top-0 left-0 w-full bg-primary-black/98 backdrop-blur-xl border-b border-cyan-glow/20 pt-20 pb-8 flex flex-col z-[105] overflow-y-auto max-h-screen"
+            className="xl:hidden absolute top-0 left-0 w-full bg-primary-black/98 backdrop-blur-xl border-b border-cyan-glow/20 pt-20 pb-8 flex flex-col z-[105]"
           >
-            {NAV_GROUPS.map((item) =>
-              item.children ? (
-                <div key={item.name}>
-                  <div className="px-8 py-2 font-inter text-xs text-cyan-glow/50 tracking-[0.4em] uppercase">
-                    {item.name}
-                  </div>
-                  {item.children.map((child) => (
-                    <Link
-                      key={child.name}
-                      href={child.href}
-                      className="block px-10 py-2.5 font-inter text-lg text-text-gray hover:text-text-white"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {child.name.toUpperCase()}
-                    </Link>
-                  ))}
-                </div>
-              ) : (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`block px-8 py-3 font-inter text-xl ${
-                    isActive(item.href) ? "text-cyan-glow" : "text-text-gray"
-                  }`}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.name.toUpperCase()}
-                </Link>
-              )
-            )}
-            <div className="px-8 pt-4 space-y-3">
+            {NAV_LINKS.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={`block px-8 py-3 font-inter text-xl ${
+                  isActive(item.href) ? "text-cyan-glow" : "text-text-gray hover:text-text-white"
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {item.name}
+              </Link>
+            ))}
+            <div className="px-8 pt-4 mt-4 border-t border-cyan-glow/10 space-y-3">
               {user ? (
                 <>
-                  {user.role === "ADMIN" ? (
-                    <Link
-                      href="/admin"
-                      className="block w-full py-3 text-center border border-cyan-glow text-cyan-glow font-space text-lg box-glow-cyan uppercase"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      ADMIN SYS
-                    </Link>
-                  ) : (
-                    <Link
-                      href="/profile"
-                      className="block w-full py-3 text-center border border-text-white/20 text-text-white font-space text-lg uppercase"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      PROFILE
-                    </Link>
-                  )}
-                  <button
-                    onClick={async () => {
-                      setMobileMenuOpen(false);
-                      await fetch("/api/auth/logout", { method: "POST" });
-                      setUser(null);
-                      router.push("/login");
-                      router.refresh();
-                    }}
-                    className="w-full py-3 text-center text-text-gray/60 hover:text-cyan-glow font-space text-sm uppercase tracking-wider cursor-pointer block"
-                  >
+                  <Link href={user.role === "ADMIN" ? "/admin" : "/profile"} className="block w-full py-3 text-center btn-primary font-space text-lg uppercase" onClick={() => setMobileMenuOpen(false)}>
+                    {user.role === "ADMIN" ? "ADMIN SYS" : "PROFILE"}
+                  </Link>
+                  <button onClick={async () => { setMobileMenuOpen(false); await fetch("/api/auth/logout", { method: "POST" }); setUser(null); router.push("/login"); router.refresh(); }} className="w-full py-3 text-center text-text-gray/60 hover:text-cyan-glow font-space text-sm uppercase tracking-wider cursor-pointer block">
                     LOGOUT
                   </button>
                 </>
               ) : (
-                <Link
-                  href="/login"
-                  className="block w-full py-3 text-center border border-cyan-glow text-cyan-glow font-space text-lg box-glow-cyan uppercase"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
+                <Link href="/login" className="block w-full py-3 text-center btn-primary font-space text-lg uppercase" onClick={() => setMobileMenuOpen(false)}>
                   SIGN IN
                 </Link>
               )}
