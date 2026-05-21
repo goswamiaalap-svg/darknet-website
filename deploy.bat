@@ -1,10 +1,13 @@
 @echo off
-echo Adding .npmrc to Git...
+echo Adding updates to Git...
 git add .
 echo Committing changes...
-git commit -m "feat: implement fully functional role-based authentication (student & admin)"
+git commit -m "style: implement DarkVector Premium design updates"
 echo Pushing to GitHub (this will trigger a new Vercel deployment)...
 git push origin master
 echo.
-echo Done! Your Vercel build should now start automatically and succeed.
+echo Trying direct Vercel CLI deployment as backup...
+cmd /c npx vercel --prod --yes
+echo.
+echo Done! Your updates should now be live on Vercel.
 pause
