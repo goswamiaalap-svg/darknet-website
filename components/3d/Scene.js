@@ -9,7 +9,7 @@ function ParticleField() {
   
   // Generate random sphere of particles
   const positions = useMemo(() => {
-    const count = 1800;
+    const count = 500; // Reduced from 1800 for better performance
     const arr = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
       // Distribute in a sphere
@@ -49,7 +49,7 @@ function NetworkLines() {
   
   const geometry = useMemo(() => {
     const points = [];
-    const nodeCount = 30;
+    const nodeCount = 15; // Reduced from 30 for better performance
     const nodes = [];
 
     for (let i = 0; i < nodeCount; i++) {

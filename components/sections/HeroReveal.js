@@ -53,12 +53,11 @@ export default function HeroReveal({ onJoin }) {
           </div>
         </motion.div>
 
-        {/* Right Side: 3D Globe placeholder / structural element if needed. Note: The actual 3D Scene is rendered globally via SceneWrapper in layout.js, so we just provide empty space here for it to shine through. */}
+        {/* Right Side: 3D Globe placeholder */}
         <div className="hidden lg:flex items-center justify-center h-[500px]">
-          {/* The global 3D scene will be visible here. We can add a glowing orb to enhance it. */}
-          <div className="relative w-full h-full flex items-center justify-center">
-             <div className="absolute w-[400px] h-[400px] bg-premium-blue/10 rounded-full blur-[100px] animate-pulse"></div>
-             <div className="absolute w-[300px] h-[300px] bg-cyan-glow/10 rounded-full blur-[80px] animate-glow"></div>
+          <div className="relative w-full h-full flex items-center justify-center translate-z-0 transform-gpu">
+             <div className="absolute w-[300px] h-[300px] bg-premium-blue/10 rounded-full blur-[60px] animate-pulse pointer-events-none"></div>
+             <div className="absolute w-[200px] h-[200px] bg-cyan-glow/10 rounded-full blur-[40px] animate-glow pointer-events-none"></div>
           </div>
         </div>
 
