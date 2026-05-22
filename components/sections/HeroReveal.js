@@ -53,12 +53,61 @@ export default function HeroReveal({ onJoin }) {
           </div>
         </motion.div>
 
-        {/* Right Side: 3D Globe placeholder */}
-        <div className="hidden lg:flex items-center justify-center h-[500px]">
-          <div className="relative w-full h-full flex items-center justify-center translate-z-0 transform-gpu">
-             <div className="absolute w-[300px] h-[300px] bg-premium-blue/10 rounded-full blur-[60px] animate-pulse pointer-events-none"></div>
-             <div className="absolute w-[200px] h-[200px] bg-cyan-glow/10 rounded-full blur-[40px] animate-glow pointer-events-none"></div>
-          </div>
+        {/* Right Side: Animated Cyber Globe & Dashboard UI */}
+        <div className="hidden lg:flex items-center justify-center h-[600px] relative">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="relative w-full h-full flex items-center justify-center"
+          >
+            {/* Background glowing orbs */}
+            <div className="absolute w-[400px] h-[400px] bg-premium-blue/10 rounded-full blur-[60px] animate-pulse pointer-events-none"></div>
+            <div className="absolute w-[250px] h-[250px] bg-cyan-glow/15 rounded-full blur-[40px] pointer-events-none"></div>
+            
+            {/* Animated Cyber Globe */}
+            <div className="relative w-[350px] h-[350px] border border-cyan-glow/20 rounded-full flex items-center justify-center">
+              {/* Rotating outer dashed ring */}
+              <motion.div 
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-[-1px] rounded-full border border-dashed border-cyan-glow/40 border-t-premium-blue"
+              ></motion.div>
+              
+              {/* Rotating inner solid ring */}
+              <motion.div 
+                animate={{ rotate: -360 }}
+                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-[30px] rounded-full border border-premium-blue/30 border-b-cyan-glow/60"
+              ></motion.div>
+
+              {/* Core */}
+              <div className="absolute inset-[100px] rounded-full bg-gradient-to-tr from-premium-blue/20 to-cyan-glow/10 border border-cyan-glow/50 backdrop-blur-md flex items-center justify-center box-glow-cyan">
+                <div className="w-16 h-16 rounded-full bg-cyan-glow animate-pulse blur-[10px]"></div>
+              </div>
+
+              {/* Floating UI Nodes */}
+              <motion.div 
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.8 }}
+                className="absolute -top-10 -right-10 glass-panel px-4 py-2 border-l-2 border-l-cyan-glow rounded-md"
+              >
+                <div className="font-mono text-xs text-cyan-glow">NODE_01</div>
+                <div className="font-inter text-[10px] text-text-gray">ACTIVE SECURE</div>
+              </motion.div>
+
+              <motion.div 
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 1 }}
+                className="absolute -bottom-5 -left-10 glass-panel px-4 py-2 border-r-2 border-r-premium-blue rounded-md"
+              >
+                <div className="font-mono text-xs text-premium-blue">THREAT_LEVEL</div>
+                <div className="font-inter text-[10px] text-text-gray">MINIMAL</div>
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
 
       </div>
